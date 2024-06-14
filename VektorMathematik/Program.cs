@@ -2,9 +2,16 @@
 {
     internal class Program
     {
+        Screen screen;
+        Lobby lobby;
+
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+            Screen screen = new Lobby();
+            do
+            {
+                screen = screen.Start();
+            } while (screen != null);
         }
     }
 }
