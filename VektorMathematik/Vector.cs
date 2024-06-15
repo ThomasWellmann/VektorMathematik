@@ -24,7 +24,7 @@ namespace VektorMathematik
             return $"[{x}, {y}, {z}]";
         }
 
-        public Vector Add(Vector _vAdd = v2)
+        public Vector Add(Vector _vAdd)
         {
             float xResult = x + _vAdd.x;
             float yResult = y + _vAdd.y;
@@ -33,13 +33,27 @@ namespace VektorMathematik
             return vResult;
         }
 
-        public Vector Subtract(Vector _vSub = v2)
+        public Vector Subtract(Vector _vSubtract)
         {
-            float xResult = x + _vSub.x;
-            float yResult = y + _vSub.y;
-            float zResult = z + _vSub.z;
+            float xResult = x - _vSubtract.x;
+            float yResult = y - _vSubtract.y;
+            float zResult = z - _vSubtract.z;
             Vector vResult = new Vector(xResult, yResult, zResult);
             return vResult;
         }
+
+        public Vector Multiply(float _skalar)
+        {
+            float xResult = x * _skalar;
+            float yResult = y * _skalar;
+            float zResult = z * _skalar;
+            Vector vResult = new Vector(xResult, yResult, zResult);
+            return vResult;
+        }
+
+        //public float GetLength()
+        //{
+            
+        //}
     }
 }
