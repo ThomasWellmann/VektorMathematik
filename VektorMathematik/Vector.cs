@@ -11,6 +11,9 @@ namespace VektorMathematik
         public float x;
         public float y;
         public float z;
+        private float xResult;
+        private float yResult;
+        private float zResult;
 
         public Vector(float _x = 0, float _y = 0, float _z = 0)
         {
@@ -21,39 +24,66 @@ namespace VektorMathematik
 
         public override string ToString() 
         {
-            return $"[{x}, {y}, {z}]";
+            return $"[ {x} | {y} | {z} ]";
         }
 
         public Vector Add(Vector _vAdd)
         {
-            float xResult = x + _vAdd.x;
-            float yResult = y + _vAdd.y;
-            float zResult = z + _vAdd.z;
+            xResult = x + _vAdd.x;
+            yResult = y + _vAdd.y;
+            zResult = z + _vAdd.z;
             Vector vResult = new Vector(xResult, yResult, zResult);
             return vResult;
         }
 
         public Vector Subtract(Vector _vSubtract)
         {
-            float xResult = x - _vSubtract.x;
-            float yResult = y - _vSubtract.y;
-            float zResult = z - _vSubtract.z;
+            xResult = x - _vSubtract.x;
+            yResult = y - _vSubtract.y;
+            zResult = z - _vSubtract.z;
             Vector vResult = new Vector(xResult, yResult, zResult);
             return vResult;
         }
 
         public Vector Multiply(float _skalar)
         {
-            float xResult = x * _skalar;
-            float yResult = y * _skalar;
-            float zResult = z * _skalar;
+            xResult = x * _skalar;
+            yResult = y * _skalar;
+            zResult = z * _skalar;
             Vector vResult = new Vector(xResult, yResult, zResult);
             return vResult;
         }
 
-        //public float GetLength()
-        //{
-            
-        //}
+        public float ScalarProduct(Vector _vScalar)
+        {
+            return x * _vScalar.x + y * _vScalar.y + z * _vScalar.z;
+        }
+
+        public Vector CrossProduct(Vector _vCross)
+        {
+
+            xResult = y * _vCross.z - z * _vCross.y;
+            yResult = z * _vCross.x - x * _vCross.z;
+            zResult = x * _vCross.y - y * _vCross.z;
+            Vector vResult = new Vector(xResult, yResult, zResult);
+            return vResult;
+        }
+
+        public float GetDistance(Vector _vDistance)
+        {
+            Vector difference = Subtract(_vDistance);
+            return difference.GetLength();
+        }
+
+        public static float S_GetDistance(Vector _v0, Vector _v1)
+        {
+            Vector difference = _v0.Subtract(_v1);
+            return difference.GetLength();
+        }
+
+        public float GetLength()
+        {
+            return (float)Math.Sqrt(x * x + y * y + z * z);
+        }
     }
 }

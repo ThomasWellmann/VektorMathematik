@@ -9,7 +9,7 @@ namespace VektorMathematik
     internal abstract class Screen
     {
         public abstract Screen Start();
-        protected void ResizeWindow(int _width = 100, int _height = 25)
+        protected void ResizeWindow(int _width = 100, int _height = 30)
         {
             Console.SetWindowPosition(0, 0);
             Console.SetWindowSize(_width, _height);
