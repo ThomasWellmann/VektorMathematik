@@ -15,8 +15,13 @@ namespace VektorMathematik
         private float yResult;
         private float zResult;
 
-
-        public Vector(float _x = 0, float _y = 0, float _z = 0)
+        public Vector()
+        {
+            x = 0f;
+            y = 0f;
+            z = 0f;
+        }
+        public Vector(float _x, float _y, float _z)
         {
             x = _x; 
             y = _y; 
