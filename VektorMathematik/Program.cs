@@ -2,9 +2,6 @@
 {
     internal class Program
     {
-        Screen screen;
-        Lobby lobby;
-
         static void Main(string[] args)
         {
             Screen screen = new Lobby();

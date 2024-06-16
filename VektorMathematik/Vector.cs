@@ -85,5 +85,10 @@ namespace VektorMathematik
         {
             return (float)Math.Sqrt(x * x + y * y + z * z);
         }
+
+        public float GetSquareLength ()
+        {
+            return ScalarProduct(this);
+        }
     }
 }
