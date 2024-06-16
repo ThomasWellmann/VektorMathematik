@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace VektorMathematik
 {
-    internal class Vector
+    internal struct Vector
     {
         public float x;
         public float y;
@@ -14,6 +14,7 @@ namespace VektorMathematik
         private float xResult;
         private float yResult;
         private float zResult;
+
 
         public Vector(float _x = 0, float _y = 0, float _z = 0)
         {

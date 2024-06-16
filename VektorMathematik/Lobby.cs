@@ -15,8 +15,8 @@ namespace VektorMathematik
             [//a0
                 "Welcome to the Vector-Calculator!"//0
             ],[//a1
-                "If you want to start with random Vectors, press \"1\".",//0
-                "Or if you want to choose your own Vectors, press \"2\"."//1
+                "If you want to start with random Vector, press \"1\".",//0
+                "Or if you want to choose your own Vector, press \"2\"."//1
             ],[//a2
                 "Type a X-Value between -99 and 99 for your Vector v1:",//0
                 "Type a Y-Value between -99 and 99 for your Vector v1:",//1
@@ -25,45 +25,46 @@ namespace VektorMathematik
                 "Type a Y-Value between -99 and 99 for your Vector v2:",//4
                 "Type a Z-Value between -99 and 99 for your Vector v2"//5
             ],[//a3
-                "Your Vectors are:",//0
+                "Your Vector are:",//0
                 "Vector v1: ",//1
                 "Vector v2: "//2
             ],[//a4
-                "Now that you have your Vectors you can do various math operations with them:",//0
-                "(1) Addition: Get the sum of your Vectors;",//1
-                "(2) Subtraction: Get the difference of your Vectors;",//2
-                "(3) Multiplication: Get the product of one of the Vectors with a Scalar;",//3
-                "(4) Scalar-Product: Get the scalar product by multiplying your Vectors;",//4
-                "(5) Cross-Product: Get the cross product by multiplying your Vectors;",//5
-                "(6) Distance: Get the distance between your Vectors or others of your liking;",//6
-                "(7) Distance: Get the distance between two new Vectors;",//7
-                "(8) Length: Get the length of one of your Vectors;",//8
-                "(9) Square-Length: Get the length of one of your Vectors squared;",//9
-                "(ESC) Restart Vectors;"
+                "Now that you have your Vector you can do various math operations with them:",//0
+                "(1) Addition: Get the sum of your Vector;",//1
+                "(2) Subtraction: Get the difference of your Vector;",//2
+                "(3) Multiplication: Get the product of one of the Vector with a Scalar;",//3
+                "(4) Scalar-Product: Get the scalar product by multiplying your Vector;",//4
+                "(5) Cross-Product: Get the cross product by multiplying your Vector;",//5
+                "(6) Distance: Get the distance between your Vector or others of your liking;",//6
+                "(7) Distance: Get the distance between two new Vector;",//7
+                "(8) Length: Get the length of one of your Vector;",//8
+                "(9) Square-Length: Get the length of one of your Vector squared;",//9
+                "(ESC) Restart Vector;"
             ]];
         private string[][] mathText = [
             [//a0
-                "To choose between your Vectors, press \"1\" (v1) or \"2\" (v2).",//0
+                "To choose between your Vector, press \"1\" (v1) or \"2\" (v2).",//0
                 "v1: ",//1
                 "v2: ",//2
-                "units"//3
+                "units",//3,
+                "Press any key to try again."//4
             ],[//a1
-                "(1) The sum of your Vectors is:"//0
+                "(1) The sum of your Vector is:"//0
             ],[//a2
-                "(2) The difference of your Vectors is:"//0
+                "(2) The difference of your Vector is:"//0
             ],[//a3
                 "(3) ",//0
                 "Now pick a number between -99 and 99 to be your Scalar.",//1
                 "The product of v0 with thr Scalar is:",//2
                 "The product of v1 with the Scalar is:"//3
             ],[//a4
-                "(4) The scalar product of your Vectors is:"//0
+                "(4) The scalar product of your Vector is:"//0
             ],[//a5
-                "(5) The cross product of your Vectors is:"//0
+                "(5) The cross product of your Vector is:"//0
             ],[//a6
-                "(6) The distance between your Vectors is:",//0
+                "(6) The distance between your Vector is:",//0
             ],[//a7
-                "(7) The distance between your Vectors is:",//0
+                "(7) The distance between your Vector is:",//0
             ],[//a8
                 "(8) ",//0
                 "Your Vector has a lenght of:",//1
@@ -249,6 +250,7 @@ namespace VektorMathematik
             for (int i = 0; i < 3; i++)
             {
                 PrintText(introText[2][i]);
+                Console.SetCursorPosition(3, Console.GetCursorPosition().Top);
                 v1Input = Console.ReadLine();
                 SetValueTo0(v1Input, i);
                 if (float.TryParse(v1Input, out v1Values[i])) ;
@@ -256,6 +258,7 @@ namespace VektorMathematik
             for (int i = 0; i < 3; i++)
             {
                 PrintText(introText[2][i + 3]);
+                Console.SetCursorPosition(3, Console.GetCursorPosition().Top);
                 v2Input = Console.ReadLine();
                 SetValueTo0(v2Input, i);
                 if (float.TryParse(v2Input, out v2Values[i])) ;
@@ -273,8 +276,10 @@ namespace VektorMathematik
             }
         }
 
-        private static void WaitForNext()
+        private void WaitForNext()
         {
+            Console.WriteLine();
+            PrintText(mathText[0][4]);
             Console.ReadKey(true);
             GetTextSpacements();
         }
