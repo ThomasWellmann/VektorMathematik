@@ -74,13 +74,13 @@ namespace VektorMathematik
 
         public float GetDistance(Vector _vDistance)
         {
-            Vector difference = Subtract(_vDistance);
+            Vector difference = this - _vDistance;
             return difference.GetLength();
         }
 
         public static float GetDistance(Vector _v0, Vector _v1)
         {
-            Vector difference = _v0.Subtract(_v1);
+            Vector difference = _v0 - _v1;
             return difference.GetLength();
         }
 
