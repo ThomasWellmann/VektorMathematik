@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Intrinsics.X86;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,9 +12,6 @@ namespace VektorMathematik
         public float x;
         public float y;
         public float z;
-        private float xResult;
-        private float yResult;
-        private float zResult;
 
         public Vector()
         {
@@ -33,29 +31,29 @@ namespace VektorMathematik
             return $"[ {x} | {y} | {z} ]";
         }
 
-        public Vector Add(Vector _vAdd)
+        public static Vector operator +(Vector _v0, Vector _v1)
         {
-            xResult = x + _vAdd.x;
-            yResult = y + _vAdd.y;
-            zResult = z + _vAdd.z;
+            float xResult = _v0.x + _v1.x;
+            float yResult = _v0.y + _v1.y;
+            float zResult = _v0.z + _v1.z;
             Vector vResult = new Vector(xResult, yResult, zResult);
             return vResult;
         }
 
-        public Vector Subtract(Vector _vSubtract)
+        public static Vector operator -(Vector _v0, Vector _v1)
         {
-            xResult = x - _vSubtract.x;
-            yResult = y - _vSubtract.y;
-            zResult = z - _vSubtract.z;
+            float xResult = _v0.x - _v1.x;
+            float yResult = _v0.y - _v1.y;
+            float zResult = _v0.z - _v1.z;
             Vector vResult = new Vector(xResult, yResult, zResult);
             return vResult;
         }
 
-        public Vector Multiply(float _skalar)
+        public static Vector operator *(Vector _v, float _skalar)
         {
-            xResult = x * _skalar;
-            yResult = y * _skalar;
-            zResult = z * _skalar;
+            float xResult = _v.x * _skalar;
+            float yResult = _v.y * _skalar;
+            float zResult = _v.z * _skalar;
             Vector vResult = new Vector(xResult, yResult, zResult);
             return vResult;
         }
@@ -67,10 +65,9 @@ namespace VektorMathematik
 
         public Vector CrossProduct(Vector _vCross)
         {
-
-            xResult = y * _vCross.z - z * _vCross.y;
-            yResult = z * _vCross.x - x * _vCross.z;
-            zResult = x * _vCross.y - y * _vCross.z;
+            float xResult = y * _vCross.z - z * _vCross.y;
+            float yResult = z * _vCross.x - x * _vCross.z;
+            float zResult = x * _vCross.y - y * _vCross.z;
             Vector vResult = new Vector(xResult, yResult, zResult);
             return vResult;
         }
@@ -81,7 +78,7 @@ namespace VektorMathematik
             return difference.GetLength();
         }
 
-        public static float S_GetDistance(Vector _v0, Vector _v1)
+        public static float GetDistance(Vector _v0, Vector _v1)
         {
             Vector difference = _v0.Subtract(_v1);
             return difference.GetLength();
@@ -89,7 +86,7 @@ namespace VektorMathematik
 
         public float GetLength()
         {
-            return (float)Math.Sqrt(x * x + y * y + z * z);
+            return (float)Math.Sqrt(ScalarProduct(this));
         }
 
         public float GetSquareLength ()

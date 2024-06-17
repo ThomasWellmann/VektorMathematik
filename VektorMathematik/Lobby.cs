@@ -30,16 +30,16 @@ namespace VektorMathematik
                 "Vector v2: "//2
             ],[//a4
                 "Now that you have your Vector you can do various math operations with them:",//0
-                "(1) Addition: Get the sum of your Vector;",//1
-                "(2) Subtraction: Get the difference of your Vector;",//2
-                "(3) Multiplication: Get the product of one of the Vector with a Scalar;",//3
-                "(4) Scalar-Product: Get the scalar product by multiplying your Vector;",//4
-                "(5) Cross-Product: Get the cross product by multiplying your Vector;",//5
-                "(6) Distance: Get the distance between your Vector or others of your liking;",//6
-                "(7) Distance: Get the distance between two new Vector;",//7
-                "(8) Length: Get the length of one of your Vector;",//8
-                "(9) Square-Length: Get the length of one of your Vector squared;",//9
-                "(ESC) Restart Vector;"
+                "(1) Addition: Get the sum of your Vectors;",//1
+                "(2) Subtraction: Get the difference of your Vectors;",//2
+                "(3) Multiplication: Get the product of one of your Vectors with a Scalar;",//3
+                "(4) Scalar-Product: Get the scalar product by multiplying your Vectors;",//4
+                "(5) Cross-Product: Get the cross product by multiplying your Vectors;",//5
+                "(6) Distance: Get the distance between your Vectors;",//6
+                "(7) Distance: Get the distance between two new Vectors;",//7
+                "(8) Length: Get the length of one of your Vectors;",//8
+                "(9) Square-Length: Get the length of one of your Vectors squared;",//9
+                "(ESC) Restart Vectors;"
             ]];
         private string[][] mathText = [
             [//a0
@@ -96,10 +96,10 @@ namespace VektorMathematik
 
         private Vector[] GetVectors()
         {
-            Console.WriteLine();
             Vector[] vArr;
             while (true)
             {
+                Console.SetCursorPosition(3, Console.GetCursorPosition().Top);
                 ConsoleKeyInfo key = Console.ReadKey(true);
                 if (key.Key == ConsoleKey.D1)
                 {
@@ -108,8 +108,8 @@ namespace VektorMathematik
                 }
                 else if (key.Key == ConsoleKey.D2)
                 {
+                    Console.WriteLine();
                     vArr = GetNewVectors();
-                    GetTextSpacements();
                     break;
                 }
             }
@@ -133,16 +133,17 @@ namespace VektorMathematik
                 Console.WriteLine();
                 PrintVectors(_vArr); 
                 PrintDoMathText();
+                Console.SetCursorPosition(3, Console.GetCursorPosition().Top);
                 ConsoleKeyInfo key = Console.ReadKey(true);
                 if (key.Key == ConsoleKey.D1)
                 {
-                    PrintText($"{mathText[1][0]}\n   {_vArr[0].Add(_vArr[1])}");
+                    PrintText($"{mathText[1][0]}\n   {_vArr[0] + _vArr[1]}");
                     WaitForNext();
                     continue;
                 }
                 else if (key.Key == ConsoleKey.D2)
                 {
-                    PrintText($"{mathText[2][0]}\n   {_vArr[0].Subtract(_vArr[1])}");
+                    PrintText($"{mathText[2][0]}\n   {_vArr[0] - _vArr[1]}");
                     WaitForNext();
                     continue;
                 }
@@ -155,13 +156,13 @@ namespace VektorMathematik
                     {
                         PrintText(mathText[0][1] + mathText[3][1]);
                         scalar = GetSkalar();
-                        PrintText($"{mathText[3][2]}\n   {_vArr[0].Multiply(scalar)}");
+                        PrintText($"{mathText[3][2]}\n   {_vArr[0] * scalar}");
                     }
                     else if (key.Key == ConsoleKey.D2)
                     {
                         PrintText(mathText[0][2] + mathText[3][1]);
                         scalar = GetSkalar();
-                        PrintText($"{mathText[3][3]}\n   {_vArr[1].Multiply(scalar)}");
+                        PrintText($"{mathText[3][3]}\n   {_vArr[1] * scalar}");
                     }
                     WaitForNext();
                     continue;
@@ -190,7 +191,7 @@ namespace VektorMathematik
 
                     PrintVectors(vArr) ;
 
-                    PrintText($"{mathText[7][0]}\n   {Vector.S_GetDistance(vArr[0], vArr[1])} {mathText[0][3]}");
+                    PrintText($"{mathText[7][0]}\n   {Vector.GetDistance(vArr[0], vArr[1])} {mathText[0][3]}");
                     WaitForNext();
                     continue;
                 }
@@ -280,6 +281,7 @@ namespace VektorMathematik
         {
             Console.WriteLine();
             PrintText(mathText[0][4]);
+            Console.SetCursorPosition(3, Console.GetCursorPosition().Top);
             Console.ReadKey(true);
             GetTextSpacements();
         }
@@ -287,6 +289,7 @@ namespace VektorMathematik
         private static float GetSkalar()
         {
             float skalar = 1f;
+            Console.SetCursorPosition(3, Console.GetCursorPosition().Top);
             string input = Console.ReadLine();
             if (input.Length < 4)
             {
