@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Intrinsics;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace VektorMathematik
+﻿namespace VektorMathematik
 {
     internal class Lobby : Screen
     {
@@ -150,19 +143,25 @@ namespace VektorMathematik
                 else if (key.Key == ConsoleKey.D3) //Multiply
                 {
                     PrintText(mathText[3][0] + mathText[0][0]);
-                    var key1 = Console.ReadKey(true);//Get Scalar
-                    var scalar = 0f;
-                    if (key1.Key == ConsoleKey.D1) //Use v0
+                    while (true)
                     {
-                        PrintText(mathText[0][1] + mathText[3][1]);
-                        scalar = GetSkalar();
-                        PrintText($"{mathText[3][2]}\n   {_vArr[0] * scalar}");
-                    }
-                    else if (key1.Key == ConsoleKey.D2) //Use v1
-                    {
-                        PrintText(mathText[0][2] + mathText[3][1]);
-                        scalar = GetSkalar();
-                        PrintText($"{mathText[3][3]}\n   {_vArr[1] * scalar}");
+                        Console.SetCursorPosition(3, Console.GetCursorPosition().Top);
+                        var key1 = Console.ReadKey(true);//Get Scalar
+                        float scalar;
+                        if (key1.Key == ConsoleKey.D1) //Use v0
+                        {
+                            PrintText(mathText[0][1] + mathText[3][1]);
+                            scalar = GetSkalar();
+                            PrintText($"{mathText[3][2]}\n   {_vArr[0] * scalar}");
+                            break;
+                        }
+                        else if (key1.Key == ConsoleKey.D2) //Use v1
+                        {
+                            PrintText(mathText[0][2] + mathText[3][1]);
+                            scalar = GetSkalar();
+                            PrintText($"{mathText[3][3]}\n   {_vArr[1] * scalar}");
+                            break;
+                        }
                     }
                     WaitForNext();
                     continue;
@@ -198,9 +197,10 @@ namespace VektorMathematik
                 else if (key.Key == ConsoleKey.D8) //Length
                 {
                     PrintText(mathText[8][0] + mathText[0][0]);
-                    var key1 = Console.ReadKey(true);
                     while (true)
                     {
+                        Console.SetCursorPosition(3, Console.GetCursorPosition().Top);
+                        var key1 = Console.ReadKey(true);
                         if (key1.Key == ConsoleKey.D1) //Use v0
                         {
                             PrintText($"{mathText[0][1] + mathText[8][1]}\n   {_vArr[0].GetLength()} {mathText[0][3]}");
@@ -218,9 +218,10 @@ namespace VektorMathematik
                 else if (key.Key == ConsoleKey.D9) //Length squared
                 {
                     PrintText(mathText[9][0] + mathText[0][0]);
-                    var key1 = Console.ReadKey(true);
                     while (true)
                     {
+                        Console.SetCursorPosition(3, Console.GetCursorPosition().Top);
+                        var key1 = Console.ReadKey(true);
                         if (key1.Key == ConsoleKey.D1) //Use v0
                         {
                             PrintText($"{mathText[0][1] + mathText[9][1]}\n   {_vArr[0].GetSquareLength()} {mathText[0][3]}");
@@ -251,7 +252,7 @@ namespace VektorMathematik
                 PrintText(introText[2][i]);
                 Console.SetCursorPosition(3, Console.GetCursorPosition().Top);
                 var vInput = Console.ReadLine();
-                Check0Value(vInput, i);
+                Check0Value(vInput);
                 if (float.TryParse(vInput, out v1Values[i])) ;
             }
             for (int i = 0; i < 3; i++)
@@ -259,14 +260,14 @@ namespace VektorMathematik
                 PrintText(introText[2][i + 3]);
                 Console.SetCursorPosition(3, Console.GetCursorPosition().Top);
                 var vInput = Console.ReadLine();
-                Check0Value(vInput, i);
+                Check0Value(vInput);
                 if (float.TryParse(vInput, out v2Values[i])) ;
             }
             Vector[] vArr = [new Vector(v1Values[0], v1Values[1], v1Values[2]), new Vector(v2Values[0], v2Values[1], v2Values[2])];
             return vArr;
         }
 
-        private static void Check0Value(string _input, int i = 0)
+        private static void Check0Value(string _input) //Returns value 0 if input is empty
         {
             if (_input == "")
             {
@@ -275,7 +276,7 @@ namespace VektorMathematik
             }
         }
 
-        private void WaitForNext()
+        private void WaitForNext() //Calculus is finished, waiting next command
         {
             Console.WriteLine();
             PrintText(mathText[0][4]);
@@ -284,17 +285,28 @@ namespace VektorMathematik
             GetTextSpacements();
         }
 
-        private static float GetSkalar()
+        private static float GetSkalar() //Returns wished scalar value
         {
-            var skalar = 1f;
-            Console.SetCursorPosition(3, Console.GetCursorPosition().Top);
-            var input = Console.ReadLine();
-            if (input.Length < 4)
+            float skalar;
+            while (true)
             {
-                Check0Value(input);
-                if (float.TryParse(input, out skalar)) ;
+                Console.SetCursorPosition(3, Console.GetCursorPosition().Top);
+                var input = Console.ReadLine();
+                if (input.Length < 4)
+                {
+                    Check0Value(input);
+                    if (float.TryParse(input, out skalar)) break;
+                }
+                ClearLine(input.Length);
             }
             return skalar;
+        }
+
+        private static void ClearLine(int _tLength) //If input is not valid, clears it
+        {
+            Console.SetCursorPosition(3, Console.GetCursorPosition().Top - 1);
+            for (int i = 0; i < _tLength; i++)
+                Console.Write(' ');
         }
 
         private static void PrintDoMathText()
@@ -313,13 +325,13 @@ namespace VektorMathematik
             Console.WriteLine();
         }
 
-        private static void PrintText(string _text)
+        private static void PrintText(string _text) //WriteLine with sidespace
         {
             Console.SetCursorPosition(3, Console.GetCursorPosition().Top);
             Console.WriteLine(_text);
         }
 
-        private float NextFloat()
+        private float NextFloat() //Returns random float between -100 and 100 with 1 decimal value
         {
             var rndValue = rnd.Next(-1000, 1001);
             return (float)rndValue / 10;
