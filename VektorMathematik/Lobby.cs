@@ -3,6 +3,7 @@
     internal class Lobby : Screen
     {
         #region Variables
+        private static readonly int textMargin = 3;
         Random rnd = new Random(DateTime.Now.Millisecond);
         private static readonly string[][] introText = [
             [//a0
@@ -344,7 +345,7 @@
 
         private static void TextMargin(int _offset = 0)
         {
-            Console.SetCursorPosition(3, Console.GetCursorPosition().Top + _offset);
+            Console.SetCursorPosition(textMargin, Console.GetCursorPosition().Top + _offset);
         }
     }
 }
