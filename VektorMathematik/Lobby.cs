@@ -3,7 +3,6 @@
     internal class Lobby : Screen
     {
         #region Variables
-        private static readonly int textMargin = 3;
         Random rnd = new Random(DateTime.Now.Millisecond);
         private static readonly string[][] introText = [
             [//a0
@@ -293,7 +292,6 @@
             return skalar;
         }
 
-
         private static void ClearLine(int _tLength) //If lineInput is not valid, clears it
         {
             TextMargin(-1);
@@ -310,42 +308,10 @@
             GetTextSpacements();
         }
 
-        private static void GetTextSpacements()
-        {
-            Console.WriteLine();
-            Console.WriteLine("----------------------------------------------------------------------------------------------------");
-            Console.WriteLine();
-        }
-
-        private static void PrintText(string _text, int _offSet = 0) //WriteLine with sidespace
-        {
-            TextMargin(_offSet);
-            Console.WriteLine(_text);
-        }
-
         private float NextFloat() //Returns random float between -99 and 99 with 1 decimal value
         {
             var rndValue = rnd.Next(-999, 1000);
             return (float)rndValue / 10;
-        }
-
-        private static ConsoleKeyInfo ReadKey(bool _intercept = false)
-        {
-            TextMargin();
-            var keyInput = Console.ReadKey(_intercept);
-            return keyInput;
-        }
-
-        private static string ReadLine()
-        {
-            TextMargin();
-            var lineInput = Console.ReadLine();
-            return lineInput;
-        }
-
-        private static void TextMargin(int _offset = 0)
-        {
-            Console.SetCursorPosition(textMargin, Console.GetCursorPosition().Top + _offset);
         }
     }
 }
