@@ -4,7 +4,7 @@
     {
         #region Variables
         Random rnd = new Random(DateTime.Now.Millisecond);
-        private static string[][] introText = [
+        private static readonly string[][] introText = [
             [//a0
                 "Welcome to the Vector-Calculator!"//0
             ],[//a1
@@ -34,7 +34,7 @@
                 "(9) Square-Length: Get the length of one of your Vectors squared;",//9
                 "(ESC) Restart Vectors;"
             ]];
-        private string[][] mathText = [
+        private static readonly string[][] mathText = [
             [//a0
                 "To choose between your Vector, press \"1\" (v1) or \"2\" (v2).",//0
                 "v1: ",//1
