@@ -92,8 +92,7 @@
             Vector[] vArr;
             while (true)
             {
-                Console.SetCursorPosition(3, Console.GetCursorPosition().Top);
-                var key = Console.ReadKey(true);
+                var key = ReadKey(true);
                 if (key.Key == ConsoleKey.D1)
                 {
                     vArr = [new Vector(NextFloat(), NextFloat(), NextFloat()), new Vector(NextFloat(), NextFloat(), NextFloat())];
@@ -126,8 +125,7 @@
                 Console.WriteLine();
                 PrintVectors(_vArr); 
                 PrintDoMathText();
-                Console.SetCursorPosition(3, Console.GetCursorPosition().Top);
-                var key = Console.ReadKey(true);
+                var key = ReadKey(true);
                 if (key.Key == ConsoleKey.D1) //Add
                 {
                     PrintText($"{mathText[1][0]}\n   {_vArr[0] + _vArr[1]}");
@@ -145,8 +143,7 @@
                     PrintText(mathText[3][0] + mathText[0][0]);
                     while (true)
                     {
-                        Console.SetCursorPosition(3, Console.GetCursorPosition().Top);
-                        var key1 = Console.ReadKey(true);//Get Scalar
+                        var key1 = ReadKey(true);//Get Scalar
                         float scalar;
                         if (key1.Key == ConsoleKey.D1) //Use v0
                         {
@@ -199,8 +196,7 @@
                     PrintText(mathText[8][0] + mathText[0][0]);
                     while (true)
                     {
-                        Console.SetCursorPosition(3, Console.GetCursorPosition().Top);
-                        var key1 = Console.ReadKey(true);
+                        var key1 = ReadKey(true);
                         if (key1.Key == ConsoleKey.D1) //Use v0
                         {
                             PrintText($"{mathText[0][1] + mathText[8][1]}\n   {_vArr[0].GetLength()} {mathText[0][3]}");
@@ -220,8 +216,7 @@
                     PrintText(mathText[9][0] + mathText[0][0]);
                     while (true)
                     {
-                        Console.SetCursorPosition(3, Console.GetCursorPosition().Top);
-                        var key1 = Console.ReadKey(true);
+                        var key1 = ReadKey(true);
                         if (key1.Key == ConsoleKey.D1) //Use v0
                         {
                             PrintText($"{mathText[0][1] + mathText[9][1]}\n   {_vArr[0].GetSquareLength()} {mathText[0][3]}");
@@ -250,16 +245,14 @@
             for (int i = 0; i < 3; i++)
             {
                 PrintText(introText[2][i]);
-                Console.SetCursorPosition(3, Console.GetCursorPosition().Top);
-                var vInput = Console.ReadLine();
+                var vInput = ReadLine();
                 Check0Value(vInput);
                 if (float.TryParse(vInput, out v1Values[i])) ;
             }
             for (int i = 0; i < 3; i++)
             {
                 PrintText(introText[2][i + 3]);
-                Console.SetCursorPosition(3, Console.GetCursorPosition().Top);
-                var vInput = Console.ReadLine();
+                var vInput = ReadLine();
                 Check0Value(vInput);
                 if (float.TryParse(vInput, out v2Values[i])) ;
             }
@@ -267,12 +260,11 @@
             return vArr;
         }
 
-        private static void Check0Value(string _input) //Returns value 0 if input is empty
+        private static void Check0Value(string _input) //Returns value 0 if lineInput is empty
         {
             if (_input == "")
             {
-                Console.SetCursorPosition(0, Console.GetCursorPosition().Top - 1);
-                PrintText("0");
+                PrintText("0", -1);
             }
         }
 
@@ -280,8 +272,7 @@
         {
             Console.WriteLine();
             PrintText(mathText[0][4]);
-            Console.SetCursorPosition(3, Console.GetCursorPosition().Top);
-            Console.ReadKey(true);
+            ReadKey(true);
             GetTextSpacements();
         }
 
@@ -290,8 +281,7 @@
             float skalar;
             while (true)
             {
-                Console.SetCursorPosition(3, Console.GetCursorPosition().Top);
-                var input = Console.ReadLine();
+                var input = ReadLine();
                 if (input.Length < 4)
                 {
                     Check0Value(input);
@@ -302,9 +292,10 @@
             return skalar;
         }
 
-        private static void ClearLine(int _tLength) //If input is not valid, clears it
+
+        private static void ClearLine(int _tLength) //If lineInput is not valid, clears it
         {
-            Console.SetCursorPosition(3, Console.GetCursorPosition().Top - 1);
+            TextMargin(-1);
             for (int i = 0; i < _tLength; i++)
                 Console.Write(' ');
         }
@@ -325,9 +316,9 @@
             Console.WriteLine();
         }
 
-        private static void PrintText(string _text) //WriteLine with sidespace
+        private static void PrintText(string _text, int _offSet = 0) //WriteLine with sidespace
         {
-            Console.SetCursorPosition(3, Console.GetCursorPosition().Top);
+            TextMargin(_offSet);
             Console.WriteLine(_text);
         }
 
@@ -335,6 +326,25 @@
         {
             var rndValue = rnd.Next(-999, 1000);
             return (float)rndValue / 10;
+        }
+
+        private static ConsoleKeyInfo ReadKey(bool _intercept = false)
+        {
+            TextMargin();
+            var keyInput = Console.ReadKey(_intercept);
+            return keyInput;
+        }
+
+        private static string ReadLine()
+        {
+            TextMargin();
+            var lineInput = Console.ReadLine();
+            return lineInput;
+        }
+
+        private static void TextMargin(int _offset = 0)
+        {
+            Console.SetCursorPosition(3, Console.GetCursorPosition().Top + _offset);
         }
     }
 }
