@@ -331,9 +331,9 @@
             Console.WriteLine(_text);
         }
 
-        private float NextFloat() //Returns random float between -100 and 100 with 1 decimal value
+        private float NextFloat() //Returns random float between -99 and 99 with 1 decimal value
         {
-            var rndValue = rnd.Next(-1000, 1001);
+            var rndValue = rnd.Next(-999, 1000);
             return (float)rndValue / 10;
         }
     }
