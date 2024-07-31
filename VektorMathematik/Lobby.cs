@@ -18,7 +18,7 @@
                 "Type a Y-Value between -99 and 99 for your Vector v2:",//4
                 "Type a Z-Value between -99 and 99 for your Vector v2"//5
             ],[//a3
-                "Your Vector are:",//0
+                "Your Vectors are:",//0
                 "Vector v1: ",//1
                 "Vector v2: "//2
             ],[//a4
