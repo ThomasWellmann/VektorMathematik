@@ -249,7 +249,7 @@
                     PrintText(introText[2][i]);
                     var vInput = ReadLine();
                     Check0Value(vInput);
-                    if (float.TryParse(vInput, out v1Values[i]) && v1Values[i] > -100 && v1Values[i] < 100) break;
+                    if (float.TryParse(vInput, out v1Values[i]) && v1Values[i] > -100 && v1Values[i] < 100) break; //int between -99 - 99
                 }
             }
             for (int i = 0; i < 3; i++)
