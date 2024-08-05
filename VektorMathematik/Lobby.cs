@@ -123,7 +123,7 @@
             {
                 Console.Clear();
                 Console.WriteLine();
-                PrintVectors(_vArr); 
+                PrintVectors(_vArr);
                 PrintDoMathText();
                 var key = ReadKey(true);
                 if (key.Key == ConsoleKey.D1) //Add
@@ -185,7 +185,7 @@
                 {
                     Vector[] vArr = GetNewVectors();
 
-                    PrintVectors(vArr) ;
+                    PrintVectors(vArr);
 
                     PrintText($"{mathText[7][0]}\n   {Vector.GetDistance(vArr[0], vArr[1])} {mathText[0][3]}");
                     WaitForNext();
@@ -244,17 +244,23 @@
             float[] v2Values = new float[3];
             for (int i = 0; i < 3; i++)
             {
-                PrintText(introText[2][i]);
-                var vInput = ReadLine();
-                Check0Value(vInput);
-                if (float.TryParse(vInput, out v1Values[i])) ;
+                while (true)
+                {
+                    PrintText(introText[2][i]);
+                    var vInput = ReadLine();
+                    Check0Value(vInput);
+                    if (float.TryParse(vInput, out v1Values[i]) && v1Values[i] > -100 && v1Values[i] < 100) break;
+                }
             }
             for (int i = 0; i < 3; i++)
             {
-                PrintText(introText[2][i + 3]);
-                var vInput = ReadLine();
-                Check0Value(vInput);
-                if (float.TryParse(vInput, out v2Values[i])) ;
+                while (true)
+                {
+                    PrintText(introText[2][i + 3]);
+                    var vInput = ReadLine();
+                    Check0Value(vInput);
+                    if (float.TryParse(vInput, out v2Values[i]) && v2Values[i] > -100 && v2Values[i] < 100) break;
+                }
             }
             Vector[] vArr = [new Vector(v1Values[0], v1Values[1], v1Values[2]), new Vector(v2Values[0], v2Values[1], v2Values[2])];
             return vArr;
